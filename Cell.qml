@@ -1,9 +1,21 @@
-import QtQuick 2.0
+import QtQuick 2.7
 
 Item {
     id: cell
     width: 64
     height: width
+
+    property int xInGrid: 0
+    property int yInGrid: 0
+
+    MouseArea {
+        anchors.fill: parent;
+        onClicked: {
+
+            //setState((getStateId() + 1) % 4 ); TODO : update grid
+
+        }
+    }
 
     state: "nothing"
     states: [
@@ -45,8 +57,7 @@ Item {
 
     ]
 
-    property int xInGrid: 0
-    property int yInGrid: 0
+
 
 
     Image {
@@ -72,6 +83,19 @@ Item {
             default:
                 cell.state = "outofbounds"
 
+        }
+    }
+
+    function getStateId() {
+        switch (cell.state) {
+            case "outofbounds":
+                return 0;
+            case "nothing":
+                return 1;
+            case "wall":
+                return 2;
+            case "floor":
+                return 3;
         }
     }
 
