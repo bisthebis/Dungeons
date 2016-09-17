@@ -7,19 +7,18 @@ import Dungeon 0.1
 
 Window {
     visible: true
-    width: 640
-    height: 480
+    width: 64*data.width
+    height: 64*data.height
     title: qsTr("Hello World")
 
     DungeonData {
         id: data;
-        Component.onCompleted: setTypeAt(DungeonData.Floor, 2, 2);
     }
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            console.log(data.at(2,2) === DungeonData.Floor);
+            JS.initGrid(data);
         }
     }
 
@@ -29,8 +28,11 @@ Window {
         columns: data.width;
         rows: data.height;
 
-        Component.onCompleted: {
-            //JS.initGrid(data);
-        }
+    }
+
+    Component.onCompleted: {
+        data.setTypeAt(DungeonData.Floor, 2, 2);
+        data.createFromFile(":/level1.txt");
+        JS.initGrid(data);
     }
 }

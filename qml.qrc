@@ -7,5 +7,6 @@
         <file>outofbounds.png</file>
         <file>wall.png</file>
         <file>GridLogic.js</file>
+        <file>level1.txt</file>
     </qresource>
 </RCC>

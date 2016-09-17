@@ -55,6 +55,7 @@ Item {
     }
 
     function setState(integerValue) {
+        //console.log("State set at : " + integerValue)
         switch (integerValue) {
             case 0:
                 cell.state = "outofbounds";
@@ -68,6 +69,8 @@ Item {
             case 3:
                 cell.state = "floor";
                 break;
+            default:
+                cell.state = "outofbounds"
 
         }
     }

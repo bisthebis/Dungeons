@@ -17,7 +17,7 @@ class DungeonData : public QObject
     Q_OBJECT
 
     public:
-        enum Type {OutOfBounds, Nothing, Wall, Floor};
+        enum Type {OutOfBounds = 0, Nothing = 1, Wall = 2, Floor = 3};
         Q_ENUM(Type)
         Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged)
         Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged)
@@ -33,19 +33,23 @@ class DungeonData : public QObject
         void setTypeAt(Type t, qint32 x, qint32 y) {
             if (x < 0 || y < 0 || x >= _width || y >= _height)
                     return;
-            else
-                data[x+y*_width] = t;
+
+            data[x+y*_width] = t;
+            emit dataChanged();
         }
 
-        void setWidth(qint32 v) {_width = v; data = QVector<Type>(_width*_height, Nothing);}
-        void setHeight(qint32 v) {_height = v; data = QVector<Type>(_width*_height, Nothing);}
+        void setWidth(qint32 v) {_width = v; data = QVector<Type>(_width*_height, Nothing); emit widthChanged();}
+        void setHeight(qint32 v) {_height = v; data = QVector<Type>(_width*_height, Nothing); emit widthChanged();}
 
         qint32 width() const {return _width;}
         qint32 height() const {return _height;}
 
+        void createFromFile(const QString& url);
+
     signals:
         void widthChanged();
         void heightChanged();
+        void dataChanged();
 
     private:
         QVector<Type> data;

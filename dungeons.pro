@@ -16,3 +16,6 @@ include(deployment.pri)
 
 HEADERS += \
     dungeondata.h
+
+DISTFILES += \
+    level1.txt
