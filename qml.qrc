@@ -1,5 +1,11 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Cell.qml</file>
+        <file>floor.png</file>
+        <file>nothing.png</file>
+        <file>outofbounds.png</file>
+        <file>wall.png</file>
+        <file>GridLogic.js</file>
     </qresource>
 </RCC>
